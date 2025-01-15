@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio de Sesión</title>
+    <style>
+      body {
+        background-color: #becaff;
+        --secondary-color: #6e76ff;
+        --text-color: #0e083d;
+        --normal-color: #4f4cff;
+        --hover-color: #311cd3;
+        font-family: system-ui, Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        text-align: center;
+      }
+
+      h1 {
+        color: #0e083d;
+      }
+
+      form {
+        padding: 20px;
+        border: 1px solid var(--normal-color);
+        border-radius: 5px;
+        background-color: white;
+        width: 340px;
+        margin: auto;
+      }
+
+      input[type="email"],
+      input[type="password"] {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid var(--normal-color);
+        border-radius: 4px;
+      }
+
+      button {
+        background-color: var(--secondary-color);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: var(--hover-color);
+      }
+
+      p {
+        margin-top: 15px;
+      }
+
+      p a {
+        color: var(--normal-color);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      p a:hover {
+        color: var(--hover-color);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Iniciar Sesión</h1>
+    <form action="../login" method="POST">
+      <input type="email" name="email" required placeholder="Email" />
+      <input type="password" name="password" required placeholder="Password" />
+      <button type="submit">Iniciar Sesión</button>
+    </form>
+    <p><a href="/register">¿No tienes una cuenta? Regístrate</a></p>
+  </body>
+</html>

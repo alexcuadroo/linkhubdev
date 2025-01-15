@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="LinkHub es un repositorio de herramientas y recursos para desarrolladores web."
+    />
+    <meta
+      name="keywords"
+      content="linkhub, linkhub dev, linkhub de desarrolladores, linkhub de desarrolladores web, linkhub de desarrolladores web, herramientas, recursos, desarrolladores, desarrolladores web"
+    />
+    <meta name="author" content="Alex Cuadro" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="icon" href="favicon.webp" />
+    <title>LinkHub DEV</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <nav><button onclick="location.href='/panel'">Ir al Panel</button></nav>
+      <h1>LinkHub DEV</h1>
+    </header>
+    <aside>
+      <input
+        type="text"
+        id="search-input"
+        placeholder="¿Dime qué buscas?"
+        autofocus
+        autocomplete="off"
+      />
+    </aside>
+    <div id="cards-container"></div>
+    <footer>
+      <p>
+        Made with 💚 by
+        <a href="https://github.com/alexcuadroo">Alex Cuadro</a>
+      </p>
+    </footer>
+    <script>
+      const links = []; // Array para almacenar los enlaces
+
+      async function fetchLinks() {
+        const response = await fetch("/api/links");
+        const data = await response.json();
+        links.push(...data); // Almacena los enlaces en el array
+        displayLinks(links); // Muestra todos los enlaces al inicio
+      }
+
+      function displayLinks(linksToDisplay) {
+        const container = document.getElementById("cards-container");
+        container.innerHTML = ""; // Limpia el contenedor antes de agregar nuevas tarjetas
+
+        linksToDisplay.forEach((link) => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `
+                  <a href="${link.url}">
+                      <img src="${link.image}" loading="lazy" alt="${link.title}" />
+                      <h3>${link.title}</h3>
+                  </a>
+                  <p>${link.description}</p>
+              `;
+          container.appendChild(card);
+        });
+      }
+
+      function searchLinks(event) {
+        const searchTerm = event.target.value.toLowerCase();
+        const filteredLinks = links.filter(
+          (link) =>
+            link.title.toLowerCase().includes(searchTerm) ||
+            link.description.toLowerCase().includes(searchTerm)
+        );
+        displayLinks(filteredLinks);
+      }
+
+      document
+        .getElementById("search-input")
+        .addEventListener("input", searchLinks);
+
+      fetchLinks();
+    </script>
+  </body>
+</html>

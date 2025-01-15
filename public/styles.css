@@ -1,0 +1,109 @@
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #4f4cff #becaff;
+}
+body {
+    font-family: system-ui, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #becaff;
+    --secondary-color: #6e76ff;
+    --text-color: #0e083d;
+    --normal-color: #4f4cff;
+    --hover-color: #311cd3;
+    max-width: 1320px;
+    margin: auto;
+  }
+  nav {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+  }
+  nav button {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 80px;
+    &:hover {
+      background-color: var(--hover-color);
+      transition: background-color 0.3s ease;
+      color: #fff
+    }
+  }
+ h1 {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-color);
+    font-size: 4rem;
+  }
+  aside {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin-top: 30px;
+  }
+  #search-input {
+    padding: 10px;
+    font-size: 20px;
+    border: 1px solid var(--text-color);
+    border-radius: 20px;
+    width: 46dvw;
+    margin: auto;
+    filter: drop-shadow(0 0 0.25rem #4f4cff);
+  }
+  /* Ejemplo de estilos para las tarjetas */
+  #cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    color: var(--text-color);
+    width: 100%;
+    justify-content: center;
+    margin-top: 120px;
+  }
+
+  .card {
+    border: 1px solid #69696984;
+    border-radius: 8px;
+    padding: 16px;
+    width: 250px;
+    max-height: 190px;
+    background-color: var(--secondary-color);
+    filter: drop-shadow(0 0 0.25rem #3331c0);
+  }
+  .card a {
+    text-decoration: none;
+    color: var(--text-color);
+    &:hover {
+      color: var(--hover-color);
+      transition: color 0.3s ease;
+      text-decoration: underline;
+      }
+  }
+  .card h3 {
+    margin: 5px 0;
+  }
+  .card img {
+    aspect-ratio: 1;
+    max-width: 32px;
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+  }
+  footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+    bottom: 0;
+  }
+  a {
+    color: var(--normal-color);
+    &:hover {
+      color: var(--hover-color);
+      transition: color 0.3s ease;
+      text-decoration: underline;
+    }
+  }

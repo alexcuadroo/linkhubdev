@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+    <html lang="es">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Agregar Recurso</title>
+        <style>
+          body {
+    font-family: system-ui, Arial, sans-serif;
+    margin: 0;
+    padding: 0 20px;
+    background-color: #becaff;
+    --secondary-color: #6e76ff;
+    --text-color: #0e083d;
+    --normal-color: #4f4cff;
+    --hover-color: #311cd3;
+    max-width: 1020px;
+    margin: auto;
+  }
+
+h1 {
+    color: #0e083d; /* Color del texto */
+}
+header nav form {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+    border: none;
+    background: none;
+}
+form {
+    margin: 20px 0; /* Espaciado alrededor de los formularios */
+    padding: 10px; /* Espaciado interno del formulario */
+    border: 1px solid var(--normal-color); /* Bordes alrededor del formulario */
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: white; 
+}
+
+label {
+    display: block; /* Muestra como bloque */
+    margin-bottom: 5px; /* Espaciado inferior */
+}
+
+input[type="text"],
+input[type="url"],
+input[type="description"] {
+    width: 80%; /* Anchura completa */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 15px; /* Espaciado inferior */
+    border: 1px solid var(--normal-color); /* Bordes del input */
+    border-radius: 4px; /* Bordes redondeados */
+    
+}
+
+button {
+    background-color: var(--secondary-color); /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 15px; /* Espaciado interno */
+    cursor: pointer; /* Cursor tipo puntero */
+    transition: background-color 0.3s; /* Transición al hacer hover */
+}
+
+button:hover {
+    background-color: var(--hover-color); /* Color de fondo al hacer hover */
+}
+
+table {
+    width: 100%; /* Anchura completa de la tabla */
+    border-collapse: collapse; /* Colapsar bordes */
+    margin-top: 20px; /* Margen superior */
+    margin-bottom: 50px;
+}
+
+th, td {
+    padding: 10px; /* Espaciado interno */
+    text-align: left; /* Alinear texto a la izquierda */
+}
+
+th {
+    background-color: var(--normal-color); /* Color de fondo del encabezado de la tabla */
+    color: white; /* Color del texto del encabezado */
+}
+
+td button {
+    background-color: var(--normal-color); /* Color de fondo del botón en la tabla */
+    color: white; /* Color del texto del botón */
+}
+
+td button:hover {
+    background-color: var(--hover-color); /* Color de fondo al hacer hover en botón de la tabla */
+}
+        </style>
+      </head>
+      <body>
+        <header>
+          <nav>
+            <form action="../logout" method="POST">
+            <button type="submit">Cerrar sesión</button>
+          </form>
+          <button onclick="location.href='/'">Ir al inicio</button>
+          </nav>
+        </header>
+        <h2>Agregar Recurso</h2>
+        <form id="resource-form">
+          <div>
+            <label for="title">Título:</label>
+            <input type="text" id="title" name="title" required />
+          </div>
+          <div>
+            <label for="url">URL:</label>
+            <input type="url" id="url" name="url" required />
+          </div>
+          <div>
+            <label for="description">Descripción:</label>
+            <input type="description"id="description" name="description" required></input>
+          </div>
+          <div>
+            <label for="image">Imagen URL:</label>
+            <input type="url" id="image" name="image" required />
+          </div>
+          <button type="submit">Agregar Recurso</button>
+        </form>
+        <title>Eliminar Links</title>
+    <script>
+        async function fetchLinks() {
+            const response = await fetch('/api/links');
+            const links = await response.json();
+            const tableBody = document.getElementById('linksTableBody');
+            tableBody.innerHTML = '';
+
+            links.forEach(link => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${link.title}</td>
+                    <td><button onclick="deleteLink(${link.id})">Eliminar</button></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        async function deleteLink(id) {
+            const response = await fetch(`/api/links/${id}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                fetchLinks(); // Refresca la lista
+            } else {
+                const error = await response.json();
+                alert(`Error: ${error.error}`);
+            }
+        }
+
+        window.onload = fetchLinks;
+    </script>
+</head>
+<body>
+    <h1>Lista de Links</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="linksTableBody">
+            <!-- Los links se cargarán aquí -->
+        </tbody>
+    </table>
+        <script>
+          document
+            .getElementById("resource-form")
+            .addEventListener("submit", async (event) => {
+              event.preventDefault(); // Previene el envío del formulario por defecto
+
+              const formData = new FormData(event.target);
+              const data = Object.fromEntries(formData);
+
+              try {
+                const response = await fetch("../../api/links", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(data),
+                });
+
+                if (!response.ok) {
+                  throw new Error("Error al agregar el recurso");
+                }
+
+                alert("Recurso agregado exitosamente");
+                fetchLinks(); // Refresca la lista
+                event.target.reset(); // Resetea el formulario
+              } catch (error) {
+                console.error(error);
+                alert("Hubo un problema al agregar el recurso");
+              }
+            });
+        </script>
+      </body>
+    </html>
+  </body>
+</html>
