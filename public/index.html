@@ -53,12 +53,12 @@
         const response = await fetch("/api/links");
         const data = await response.json();
         links.push(...data); // Almacena los enlaces en el array
-        displayLinks(links); // Muestra todos los enlaces al inicio
+        displayLinks(links); 
       }
 
       function displayLinks(linksToDisplay) {
         const container = document.getElementById("cards-container");
-        container.innerHTML = ""; // Limpia el contenedor antes de agregar nuevas tarjetas
+        container.innerHTML = "";
 
         linksToDisplay.forEach((link) => {
           const card = document.createElement("div");

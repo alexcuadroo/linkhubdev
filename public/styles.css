@@ -97,7 +97,6 @@ body {
     transform: scale(1);
   }
 }
-  /* Ejemplo de estilos para las tarjetas */
   #cards-container {
     display: flex;
     flex-wrap: wrap;
