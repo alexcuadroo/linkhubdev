@@ -48,18 +48,15 @@
     </footer>
     <script>
       const links = []; // Array para almacenar los enlaces
-
       async function fetchLinks() {
         const response = await fetch("/api/links");
         const data = await response.json();
         links.push(...data); // Almacena los enlaces en el array
         displayLinks(links); 
       }
-
       function displayLinks(linksToDisplay) {
         const container = document.getElementById("cards-container");
         container.innerHTML = "";
-
         linksToDisplay.forEach((link) => {
           const card = document.createElement("div");
           card.className = "card";
@@ -73,7 +70,6 @@
           container.appendChild(card);
         });
       }
-
       function searchLinks(event) {
         const searchTerm = event.target.value.toLowerCase();
         const filteredLinks = links.filter(
@@ -83,7 +79,6 @@
         );
         displayLinks(filteredLinks);
       }
-
       document
         .getElementById("search-input")
         .addEventListener("input", searchLinks);
