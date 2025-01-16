@@ -6,9 +6,9 @@ body {
     font-family: system-ui, Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #becaff;
+    background-color: #a0ade2;
     --secondary-color: #6e76ff;
-    --text-color: #0e083d;
+    --text-color: #02000f;
     --normal-color: #4f4cff;
     --hover-color: #311cd3;
     max-width: 1320px;
