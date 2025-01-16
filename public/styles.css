@@ -115,7 +115,7 @@ body {
   }
   @media screen and (max-width: 768px) {
     #search-input {
-      width: 84%;
+      width: 88%;
       margin: auto;
     }
     header h1 {
@@ -128,5 +128,8 @@ body {
       margin: auto;
       margin-top: 10px;
       box-sizing: border-box;
+    }
+    .card {
+      width: 78%;
     }
   }
