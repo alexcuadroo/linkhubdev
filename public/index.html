@@ -14,7 +14,6 @@
     <meta name="author" content="Alex Cuadro" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#6e76ff" />
-
     <link rel="icon" href="favicon.webp" />
     <title>LinkHub | Herramientas para desarrolladores web</title>
     <link rel="stylesheet" href="styles.css" />
@@ -65,7 +64,7 @@
           const card = document.createElement("div");
           card.className = "card";
           card.innerHTML = `
-                  <a href="${link.url}">
+                  <a href="${link.url}" target="_blank" rel="noopener noreferrer">
                       <img src="${link.image}" loading="lazy" alt="logo de ${link.title}" />
                       <h3>${link.title}</h3>
                   </a>
