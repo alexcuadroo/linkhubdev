@@ -15,29 +15,35 @@
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#a0ade2" />
     <link rel="icon" href="favicon.webp" />
-    <title>LinkHub | Herramientas para desarrolladores web</title>
     <link rel="stylesheet" href="index.css" />
+    <title>LinkHub | Herramientas para desarrolladores web</title>
   </head>
   <body>
     <header>
-      <nav><button onclick="location.href='/panel'">Ir al Panel</button></nav>
-      <h1>LinkHub DEV</h1>
-      <p>Una valija con herramientas para desarolladores web</p>
+      <nav>
+        <h1>LinkHub DEV</h1>
+        <button onclick="location.href='/panel'">Ir al Panel</button>
+      </nav>
     </header>
-    <aside>
-      <input
-        type="text"
-        id="search-input"
-        placeholder="¿Qué herramienta necesitas?"
-        autofocus
-        autocomplete="off"
-      />
-    </aside>
-    <div id="cards-container">
-      <div class="loader">
-        <div></div>
-        <div></div>
-        <div></div>
+    <div class="container">
+      <!-- Aside a la izquierda -->
+      <aside>
+        <p>Una valija con herramientas para desarolladores web</p>
+        <input
+          type="text"
+          id="search-input"
+          placeholder="¿Qué herramienta necesitas?"
+          autofocus
+          autocomplete="off"
+        />
+      </aside>
+      <!-- Contenedor de cards -->
+      <div id="cards">
+        <div class="loader">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
     </div>
     <footer>
@@ -55,18 +61,18 @@
         displayLinks(links);
       }
       function displayLinks(linksToDisplay) {
-        const container = document.getElementById("cards-container");
+        const container = document.getElementById("cards");
         container.innerHTML = "";
         linksToDisplay.forEach((link) => {
           const card = document.createElement("div");
           card.className = "card";
           card.innerHTML = `
-                  <a href="${link.url}" target="_blank" rel="noopener noreferrer">
-                      <img src="${link.image}" loading="lazy" alt="logo de ${link.title}" />
-                      <h3>${link.title}</h3>
-                  </a>
-                  <p>${link.description}</p>
-              `;
+                    <a href="${link.url}" target="_blank" rel="noopener noreferrer">
+                        <img src="${link.image}" loading="lazy" alt="logo de ${link.title}" />
+                        <h3>${link.title}</h3>
+                    </a>
+                    <p>${link.description}</p>
+                `;
           container.appendChild(card);
         });
       }
