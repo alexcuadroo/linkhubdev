@@ -1,97 +1,132 @@
 <!DOCTYPE html>
-    <html lang="es">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Agregar Recurso</title>
-        <style>
-          body {
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Agregar Recurso</title>
+<style>
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #fff #a0ade2;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
     font-family: system-ui, Arial, sans-serif;
-    margin: 0;
-    padding: 0 20px;
-    background-color: #becaff;
-    --secondary-color: #6e76ff;
-    --text-color: #0e083d;
-    --normal-color: #4f4cff;
-    --hover-color: #311cd3;
-    max-width: 1020px;
-    margin: auto;
-  }
-
-h1 {
-    color: #0e083d; /* Color del texto */
-}
-header nav form {
-    display: flex;
-    justify-content: flex-end;
+    line-height: 1.6;
     padding: 20px;
+    background-color: #cdd7fd;
+}
+
+header {
+    color: white;
+    padding: 10px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav button {
+    background-color: #0008ff;
+    color: #ffffff;
     border: none;
-    background: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
 }
+
+nav button:hover {
+    background-color: #000233e0;
+}
+
+main {
+    margin-top: 20px;
+}
+
 form {
-    margin: 20px 0; /* Espaciado alrededor de los formularios */
-    padding: 10px; /* Espaciado interno del formulario */
-    border: 1px solid var(--normal-color); /* Bordes alrededor del formulario */
-    border-radius: 5px; /* Bordes redondeados */
-    background-color: white; 
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 200px;
 }
 
-label {
-    display: block; /* Muestra como bloque */
-    margin-bottom: 5px; /* Espaciado inferior */
+form div {
+    margin-bottom: 10px;
 }
 
-input[type="text"],
-input[type="url"],
-input[type="description"] {
-    width: 80%; /* Anchura completa */
-    padding: 10px; /* Espaciado interno */
-    margin-bottom: 15px; /* Espaciado inferior */
-    border: 1px solid var(--normal-color); /* Bordes del input */
-    border-radius: 4px; /* Bordes redondeados */
-    
+form label {
+    margin-bottom: 5px;
 }
 
-button {
-    background-color: var(--secondary-color); /* Color de fondo del botón */
-    color: white; /* Color del texto del botón */
-    border: none; /* Sin bordes */
-    border-radius: 5px; /* Bordes redondeados */
-    padding: 10px 15px; /* Espaciado interno */
-    cursor: pointer; /* Cursor tipo puntero */
-    transition: background-color 0.3s; /* Transición al hacer hover */
+form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-button:hover {
-    background-color: var(--hover-color); /* Color de fondo al hacer hover */
+form button {
+    background-color: #28a745;
+    color: white;
+    max-width: 70%;
+    margin: auto;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+form button:hover {
+    background-color: #218838;
 }
 
 table {
-    width: 100%; /* Anchura completa de la tabla */
-    border-collapse: collapse; /* Colapsar bordes */
-    margin-top: 20px; /* Margen superior */
-    margin-bottom: 50px;
+    width: 600px;
+    border-collapse: collapse;
+    
+}
+table button {
+  background-color: #28a745;
+  color: white;
+  width: 100%;
+  margin: auto;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    &:hover {
+        background-color: #218838;
+        transition: background-color 0.3s ease;
+      }
 }
 
-th, td {
-    padding: 10px; /* Espaciado interno */
-    text-align: left; /* Alinear texto a la izquierda */
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ccc;
 }
 
-th {
-    background-color: var(--normal-color); /* Color de fondo del encabezado de la tabla */
-    color: white; /* Color del texto del encabezado */
-}
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+    }
 
-td button {
-    background-color: var(--normal-color); /* Color de fondo del botón en la tabla */
-    color: white; /* Color del texto del botón */
-}
+    nav button {
+        margin-bottom: 10px;
+    }
 
-td button:hover {
-    background-color: var(--hover-color); /* Color de fondo al hacer hover en botón de la tabla */
+    form div {
+        flex-direction: column;
+    }
+
+    table th, table td {
+        font-size: 14px;
+    }
 }
-        </style>
+      </style>
       </head>
       <body>
         <header>
@@ -102,8 +137,9 @@ td button:hover {
           <button onclick="location.href='/'">Ir al inicio</button>
           </nav>
         </header>
-        <h2>Agregar Recurso</h2>
+        <main>
         <form id="resource-form">
+          <h2>Agregar Recurso</h2>
           <div>
             <label for="title">Título:</label>
             <input type="text" id="title" name="title" required />
@@ -122,42 +158,6 @@ td button:hover {
           </div>
           <button type="submit">Agregar Recurso</button>
         </form>
-        <title>Eliminar Links</title>
-    <script>
-        async function fetchLinks() {
-            const response = await fetch('/api/links');
-            const links = await response.json();
-            const tableBody = document.getElementById('linksTableBody');
-            tableBody.innerHTML = '';
-
-            links.forEach(link => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${link.title}</td>
-                    <td><button onclick="deleteLink(${link.id})">Eliminar</button></td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
-
-        async function deleteLink(id) {
-            const response = await fetch(`/api/links/${id}`, {
-                method: 'DELETE',
-            });
-
-            if (response.ok) {
-                fetchLinks();
-            } else {
-                const error = await response.json();
-                alert(`Error: ${error.error}`);
-            }
-        }
-
-        window.onload = fetchLinks;
-    </script>
-</head>
-<body>
-    <h1>Lista de Links</h1>
     <table border="1">
         <thead>
             <tr>
@@ -168,6 +168,39 @@ td button:hover {
         <tbody id="linksTableBody">
         </tbody>
     </table>
+  </main>
+    <script>
+      async function fetchLinks() {
+          const response = await fetch('/api/links');
+          const links = await response.json();
+          const tableBody = document.getElementById('linksTableBody');
+          tableBody.innerHTML = '';
+
+          links.forEach(link => {
+              const row = document.createElement('tr');
+              row.innerHTML = `
+                  <td>${link.title}</td>
+                  <td><button onclick="deleteLink(${link.id})">Eliminar</button></td>
+              `;
+              tableBody.appendChild(row);
+          });
+      }
+
+      async function deleteLink(id) {
+          const response = await fetch(`/api/links/${id}`, {
+              method: 'DELETE',
+          });
+
+          if (response.ok) {
+              fetchLinks();
+          } else {
+              const error = await response.json();
+              alert(`Error: ${error.error}`);
+          }
+      }
+
+      window.onload = fetchLinks;
+  </script>
         <script>
           document
             .getElementById("resource-form")

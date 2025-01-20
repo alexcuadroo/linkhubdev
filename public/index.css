@@ -41,6 +41,7 @@ nav h1 {
   margin: 0;
   font-size: 3rem;
   color: var(--text-color);
+  filter: drop-shadow(20px 0 1rem #02006ce9);
 }
 .container {
   display: flex;
@@ -50,7 +51,7 @@ nav h1 {
 
 aside {
   flex: 1;
-  max-width: 320px;
+  max-width: 340px;
   padding: 20px;
 }
 
@@ -123,14 +124,12 @@ aside input {
   scrollbar-width: thin;  
 }
 
-
 .card {
   border-radius: 5px;
   padding: 15px;
-  max-height: 140px;
   border: 1px solid #69696984;
   border-radius: 8px;
-  max-height: 190px;
+  max-height: 160px;
   background-color: var(--secondary-color);
   filter: drop-shadow(0 0 0.25rem #4f4dd2);
   &:hover {
@@ -146,6 +145,9 @@ aside input {
     transition: color 0.3s ease;
     text-decoration: underline;
     }
+}
+.card p {
+  margin: 0;
 }
 .card h3 {
   margin: 5px 0;

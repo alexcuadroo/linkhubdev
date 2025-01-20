@@ -48,11 +48,11 @@ const isAuthenticated = (req, res, next) => {
     return res.redirect('/login');
 };
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(process.cwd() + '/public/index.html');
 });
 // Ruta protegida del panel
 app.get('/panel', isAuthenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, 'private', 'panel', 'index.html'));
+    res.sendFile(process.cwd() + '/private/panel/index.html');
 });
 // Ruta para el registro de usuarios
 /* 
@@ -87,14 +87,10 @@ app.post('/login', async (req, res) => {
         const [rows] = await pool.execute('SELECT * FROM users WHERE email = ?', [
             email,
         ]);
-
         if (rows.length === 0) {
             return res.status(401).send('Usuario o contraseña incorrectos');
         }
-
         const user = rows[0];
-
-        // Verificar la contraseña
         const match = await bcrypt.compare(password, user.password_hash);
         if (!match) {
             return res.status(401).send('Usuario o contraseña incorrectos');
@@ -142,7 +138,7 @@ app.delete('/api/links/:id', async (req, res) => {
         if (result[0].affectedRows === 0) {
             return res.status(404).json({ error: 'Recurso no encontrado' });
         }
-        res.status(204).send(); // No content
+        res.status(204).send();
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error al eliminar el recurso' });
