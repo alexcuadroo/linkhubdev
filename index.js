@@ -9,12 +9,11 @@ require('dotenv').config();
 const { logout } = require('./functions/auth.js');
 
 const app = express();
+app.disable('x-powered-by');
 app.use(express.urlencoded({ extended: true })); // Para manejar datos de formularios
 app.use(express.json()); // Para manejar datos JSON
-
 // Sirve archivos estáticos desde la carpeta 'public'
 app.use(express.static(path.join(__dirname, 'public')));
-
 // Configuración de la base de datos
 const dbOptions = {
     host: process.env.DB_HOST,
@@ -22,15 +21,11 @@ const dbOptions = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
 };
-
 // Conexión a MySQL
 const pool = mysql.createPool(dbOptions);
 const pool2 = mysql2.createPool(dbOptions);
-
-// Almacenamiento de sesiones en MySQL
+// Almacenamiento de sesiones en MySQL, innecesario, se puede quitar
 const sessionStore = new MySQLStore(dbOptions);
-
-
 app.use(
     session({
         key: 'linkhub_dev_user',
@@ -41,11 +36,10 @@ app.use(
         cookie: {
             maxAge: 24 * 60 * 60 * 1000,
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // true si está en producción
+            secure: process.env.NODE_ENV === 'production', // true si está en producción, no he podido hacer funcionar
         },
     })
 );
-
 // Middleware para verificar autenticación
 const isAuthenticated = (req, res, next) => {
     if (req.session && req.session.userId) {
@@ -53,12 +47,13 @@ const isAuthenticated = (req, res, next) => {
     }
     return res.redirect('/login');
 };
-
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 // Ruta protegida del panel
 app.get('/panel', isAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, 'private', 'panel', 'index.html'));
 });
-
 // Ruta para el registro de usuarios
 /* 
 app.post('/register', async (req, res) => {
@@ -115,9 +110,6 @@ app.post('/login', async (req, res) => {
         res.status(500).send('Error al iniciar sesión');
     }
 });
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
 // Endpoint para recuperar los links
 app.get('/api/links', (req, res) => {
     pool2.query('SELECT * FROM linkdev', (err, results) => {
@@ -162,7 +154,11 @@ app.delete('/api/links/:id', async (req, res) => {
 });
 // Ruta para cerrar sesión
 app.post('/logout', logout);
-
+app.use((
+    req, res) => {
+    res.status(404).send('<h1>404 - Página no encontrada</h1><p>La página que estás buscando no existe o ha sido eliminada.<a href="/">Volver a la página principal</a></p>')
+}
+)
 app.listen(3000, () => {
     console.log('Servidor corriendo en http://localhost:3000');
 });
