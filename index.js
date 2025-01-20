@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
 });
 // Ruta protegida del panel
 app.get('/panel', isAuthenticated, (req, res) => {
-    res.sendFile(process.cwd() + '/private/panel/index.html');
+    res.sendFile(path.join(__dirname, 'private', 'panel', 'index.html'));
 });
 // Ruta para el registro de usuarios
 /* 
