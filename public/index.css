@@ -42,17 +42,15 @@ nav h1 {
   font-size: 3rem;
   color: var(--text-color);
 }
-/* Contenedor principal */
 .container {
   display: flex;
   flex-wrap: wrap;
   flex: 1;
 }
 
-/* Aside */
 aside {
   flex: 1;
-  max-width: 320px; /* Ancho fijo para desktop */
+  max-width: 320px;
   padding: 20px;
 }
 
@@ -109,7 +107,6 @@ aside input {
     transform: scale(1);
   }
 }
-/* Contenedor de cards */
 #cards {
   max-width: 1050px;
   height: 70vh;
@@ -165,7 +162,6 @@ footer {
   bottom: 0;
 }
 
-/* Responsive para móviles */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;

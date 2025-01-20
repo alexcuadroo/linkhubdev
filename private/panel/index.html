@@ -146,7 +146,7 @@ td button:hover {
             });
 
             if (response.ok) {
-                fetchLinks(); // Refresca la lista
+                fetchLinks();
             } else {
                 const error = await response.json();
                 alert(`Error: ${error.error}`);
@@ -166,14 +166,13 @@ td button:hover {
             </tr>
         </thead>
         <tbody id="linksTableBody">
-            <!-- Los links se cargarán aquí -->
         </tbody>
     </table>
         <script>
           document
             .getElementById("resource-form")
             .addEventListener("submit", async (event) => {
-              event.preventDefault(); // Previene el envío del formulario por defecto
+              event.preventDefault(); 
 
               const formData = new FormData(event.target);
               const data = Object.fromEntries(formData);
@@ -192,8 +191,8 @@ td button:hover {
                 }
 
                 alert("Recurso agregado exitosamente");
-                fetchLinks(); // Refresca la lista
-                event.target.reset(); // Resetea el formulario
+                fetchLinks(); 
+                event.target.reset();
               } catch (error) {
                 console.error(error);
                 alert("Hubo un problema al agregar el recurso");

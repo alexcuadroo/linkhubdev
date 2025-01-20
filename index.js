@@ -99,11 +99,7 @@ app.post('/login', async (req, res) => {
         if (!match) {
             return res.status(401).send('Usuario o contraseña incorrectos');
         }
-
-        // Guardar el ID del usuario en la sesión
         req.session.userId = user.id;
-
-        // Redirigir al dashboard tras inicio de sesión exitoso
         res.redirect('/panel');
     } catch (error) {
         console.error(error);
